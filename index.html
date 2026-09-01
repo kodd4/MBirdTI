@@ -8,8 +8,14 @@
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
         h1 { color: #333; font-size: 24px; margin-bottom: 20px; }
-        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; background-color: #4a6fa5; color: white; font-size: 16px; cursor: pointer; transition: background 0.2s; }
-        .btn:hover { background-color: #3b5a84; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; background-color: #4a6fa5; color: white; font-size: 16px; cursor: pointer; transition: background 0.2s; box-sizing: border-box; text-decoration: none; }
+        .btn:hover { opacity: 0.9; }
+        /* X (Twitter) ボタン */
+        .btn-x { background-color: #000000; font-weight: bold; }
+        /* LINE シェアボタン */
+        .btn-line { background-color: #06C755; font-weight: bold; }
+        /* LINE 友だち追加ボタン */
+        .btn-line-add { background-color: #00B900; font-weight: bold; }
         .hidden { display: none; }
         .result-title { font-size: 26px; color: #e63946; font-weight: bold; margin-top: 15px; margin-bottom: 15px; }
     </style>
@@ -34,28 +40,39 @@
         <h2>あなたのバードナリティは...</h2>
         <div id="result-type" class="result-title">タイプ名</div>
         <p id="result-desc">解説文</p>
+        
+        <!-- SNSシェア＆誘導ボタン群 -->
+        <button class="btn btn-x" onclick="shareX()">X (旧Twitter) で結果をシェア</button>
+        <button class="btn btn-line" onclick="shareLine()">LINEで結果をシェア</button>
+
+        <!-- もしLINE公式アカウントをお持ちの場合は下記を使用（いらない場合は削ってください） -->
+        <!-- <a class="btn btn-line-add" href="ここにあなたのLINE公式アカウントのURL" target="_blank">公式LINEを友だち追加</a> -->
+        
         <button class="btn" style="background-color: #6c757d;" onclick="location.reload()">もう一度やる</button>
     </div>
 </div>
 
 <script>
-// 1. 質問データ（「はい」「いいえ」それぞれで、どのタイプに何点入れるかを細かく指定）
+// 1. 質問データ
 const questions = [
     {
         text: "自分のねぐらと巣は清潔で整理整頓されている。",
-        // 「はい」の場合の加算先と点数
-        yesScores: { "SENG": 3, "INWS": 1 }, 
-        // 「いいえ」の場合の加算先と点数
+        yesScores: { "SENG": 1, "INWS": 1 }, 
         noScores: { "YTGS": 3 } 
     },
     {
-        text: "未経験の新しいアプローチを試すのは楽しいと感じる。",
-        yesScores: { "CROW": 6 }
+        text: "群れで何かをするのが好き。",
+        yesScores: { "SPRW": 3, "SENG": 2 },
+        noScores: { "INWS": 3 }
     },
     {
-        text: "群れで行う趣味やアクティビティより、一羽で行うものの方が楽しい。",
-        yesScores: { "INWS": 2, "CROW": 1 },
-        noScores: { "SPRW": 3, "SENG": 3 }
+        text: "未経験の新しいアプローチを試すのは楽しいと感じる。",
+        yesScores: { "CROW": 3 }
+    },
+    {
+        text: "群れで行う趣味やアクティビティより、一人で行うものの方が楽しい。",
+        yesScores: { "INWS": 3, "CROW": 1 },
+        noScores: { "SPRW": 3, "SENG": 2 }
     },
     {
         text: "やらなければならないことをしてから羽繕いするのが好き。",
@@ -63,12 +80,12 @@ const questions = [
     },
     {
         text: "静かな隠れ家のような場所より、鳥がたくさんいて賑やかな雰囲気の方が好き。",
-        yesScores: { "SPRW": 3, "SENG": 3, "CROW": 1 },
+        yesScores: { "SPRW": 3, "SENG": 2, "CROW": 1 },
         noScores: { "INWS": 3 }
     },
     {
         text: "定期的に新しいつがい相手を作っている。",
-        yesScores: { "SPRW": 3, "SENG": 3, "YTGS": 3}
+        noScores: { "INWS": 3, "CROW": 3 }
     },
     {
         text: "締め切りを守るのが苦手。",
@@ -76,27 +93,26 @@ const questions = [
     },
     {
         text: "少数の鳥と深く付き合う方が好きだ。",
-        yesScores: { "INWS": 3, "CROW": 1, "YTGD": 2 },
-        noScores: { "SENG": 3, "SPRW": 3 }
+        yesScores: { "INWS": 3, "CROW": 1, "YTGS": 2 }
     },
     {
         text: "人前でさえずることに抵抗がない。",
         yesScores: { "SPRW": 3, "SENG": 2, "CROW": 2 },
-        noScores: { "INWS": 1 }
+        noScores: { "INWS": 3 }
     },
     {
         text: "新しい環境にすぐに馴染める方だ。",
         yesScores: { "CROW": 3, "SPRW": 2 },
-        noScores: { "INWS": 1 }
+        noScores: { "INWS": 3 }
     },
     {
         text: "自由で開放的な環境を好む。",
-        yesScores: { "CROW": 2, "YTGS": 3 },
+        yesScores: { "SPRW": 1, "CROW": 2, "YTGS": 3 },
         noScores: { "INWS": 2 }
     },
     {
         text: "渡りルートは事前に決めておきたい方だ。",
-        yesScores: { "YTGS": 3}
+        yesScores: { "YTGS": 3 }
     },
     {
         text: "自分の縄張りをはっきりと主張する方だ。",
@@ -104,23 +120,21 @@ const questions = [
     },
     {
         text: "あなたは鳥をコントロールするのではなく、鳥にコントロールされている。",
-        yesScores: { "BDER": 15}
+        yesScores: { "BDER": 10 }
     }
-
 ];
 
-// 2. 診断結果のデータ（ここは前回と同じ）
+// 2. 診断結果のデータ
 const results = {
     "SENG": { name: "SENG", desc: "シマエナガ。小さくて白いです。人を魅了する能力にかけては、右に出る鳥はいません。" },
     "INWS": { name: "INWS", desc: "イヌワシ。大胆な指導鳥タイプ。" },
-    "BDER": { name: "BIRDer", desc: "バーダー。貪欲な鳥欲がある野鳥愛好家。" },
+    "BDER": { name: "BDER", desc: "バーダー。貪欲な鳥欲がある野鳥愛好家。" },
     "SPRW": { name: "SPRW", desc: "スズメ。ささいなことで幸せを感じられるタイプです。" },
     "YTGS": { name: "YTGS", desc: "ヤツガシラ。カリスマ性があり、見る人を魅了します。" },
     "CROW": { name: "CROW", desc: "カラス。賢くて好奇心旺盛な思考鳥。新しいことの探索・体験にいつも積極的です。" }
-
 };
 
-// 3. 各タイプの初期スコア（ここは前回と同じ）
+// 3. 各タイプの初期スコア
 let scores = {
     "SENG": 0,
     "INWS": 0,
@@ -131,6 +145,7 @@ let scores = {
 };
 
 let currentIdx = 0;
+let currentResultName = "";
 
 function startQuiz() {
     document.getElementById("start-screen").classList.add("hidden");
@@ -144,17 +159,15 @@ function showQuestion() {
     document.getElementById("question-text").innerText = q.text;
 }
 
-// ★ 変更点：選択された方のスコアをループで全部加算する
 function answer(isYes) {
     let q = questions[currentIdx];
-    
-    // 「はい」なら yesScores、「いいえ」なら noScores を使う
     let targetScores = isYes ? q.yesScores : q.noScores;
 
-    // 指定されたすべてのタイプに点数を足していく
-    for (let type in targetScores) {
-        if (scores[type] !== undefined) {
-            scores[type] += targetScores[type]; // 指定された点数分をプラス
+    if (targetScores) {
+        for (let type in targetScores) {
+            if (scores[type] !== undefined) {
+                scores[type] += targetScores[type];
+            }
         }
     }
 
@@ -166,7 +179,6 @@ function answer(isYes) {
     }
 }
 
-// ★ 同点時の優先順位チェック付きの結果表示（前回と同じ）
 function showResult() {
     document.getElementById("question-screen").classList.add("hidden");
     document.getElementById("result-screen").classList.remove("hidden");
@@ -186,8 +198,26 @@ function showResult() {
     }
 
     let finalResult = results[highestType];
+    currentResultName = finalResult.name;
     document.getElementById("result-type").innerText = finalResult.name;
     document.getElementById("result-desc").innerText = finalResult.desc;
+}
+
+// X (旧Twitter) でシェア
+function shareX() {
+    const siteUrl = window.location.href;
+    const text = `私のバードナリティは【${currentResultName}】でした！\n`;
+    const hashtags = "MBirdTI診断,性格診断";
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(siteUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
+    window.open(shareUrl, '_blank');
+}
+
+// ★ LINEで結果をシェア
+function shareLine() {
+    const siteUrl = window.location.href;
+    const text = `私のバードナリティは【${currentResultName}】でした！\n${siteUrl}`;
+    const shareUrl = `https://line.me/R/share?text=${encodeURIComponent(text)}`;
+    window.open(shareUrl, '_blank');
 }
 </script>
 
