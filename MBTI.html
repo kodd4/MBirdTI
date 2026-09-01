@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBirdTI診断</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        h1 { color: #333; font-size: 24px; margin-bottom: 20px; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; background-color: #4a6fa5; color: white; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background-color: #3b5a84; }
+        .hidden { display: none; }
+        .result-title { font-size: 26px; color: #e63946; font-weight: bold; margin-top: 15px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div id="start-screen">
+        <h1>MBirdTI診断</h1>
+        <p>質問に「はい」「いいえ」で答えてください。</p>
+        <button class="btn" onclick="startQuiz()">診断を始める</button>
+    </div>
+
+    <div id="question-screen" class="hidden">
+        <h2 id="question-number">質問 1</h2>
+        <p id="question-text">質問文</p>
+        <button class="btn" onclick="answer(true)">はい</button>
+        <button class="btn" onclick="answer(false)" style="background-color: #8d99ae;">いいえ</button>
+    </div>
+
+    <div id="result-screen" class="hidden">
+        <h2>あなたのバードナリティは...</h2>
+        <div id="result-type" class="result-title">タイプ名</div>
+        <p id="result-desc">解説文</p>
+        <button class="btn" style="background-color: #6c757d;" onclick="location.reload()">もう一度やる</button>
+    </div>
+</div>
+
+<script>
+// 1. 質問データ（「はい」「いいえ」それぞれで、どのタイプに何点入れるかを細かく指定）
+const questions = [
+    {
+        text: "自分のねぐらと巣は清潔で整理整頓されている。",
+        // 「はい」の場合の加算先と点数
+        yesScores: { "SENG": 3, "INWS": 1 }, 
+        // 「いいえ」の場合の加算先と点数
+        noScores: { "YTGS": 3 } 
+    },
+    {
+        text: "未経験の新しいアプローチを試すのは楽しいと感じる。",
+        yesScores: { "CROW": 6 }
+    },
+    {
+        text: "群れで行う趣味やアクティビティより、一羽で行うものの方が楽しい。",
+        yesScores: { "INWS": 2, "CROW": 1 },
+        noScores: { "SPRW": 3, "SENG": 3 }
+    },
+    {
+        text: "やらなければならないことをしてから羽繕いするのが好き。",
+        yesScores: { "CROW": 1, "INWS": 1 }
+    },
+    {
+        text: "静かな隠れ家のような場所より、鳥がたくさんいて賑やかな雰囲気の方が好き。",
+        yesScores: { "SPRW": 3, "SENG": 3, "CROW": 1 },
+        noScores: { "INWS": 3 }
+    },
+    {
+        text: "定期的に新しいつがい相手を作っている。",
+        yesScores: { "SPRW": 3, "SENG": 3, "YTGS": 3}
+    },
+    {
+        text: "締め切りを守るのが苦手。",
+        yesScores: { "SENG": 1, "SPRW": 1 }
+    },
+    {
+        text: "少数の鳥と深く付き合う方が好きだ。",
+        yesScores: { "INWS": 3, "CROW": 1, "YTGD": 2 },
+        noScores: { "SENG": 3, "SPRW": 3 }
+    },
+    {
+        text: "人前でさえずることに抵抗がない。",
+        yesScores: { "SPRW": 3, "SENG": 2, "CROW": 2 },
+        noScores: { "INWS": 1 }
+    },
+    {
+        text: "新しい環境にすぐに馴染める方だ。",
+        yesScores: { "CROW": 3, "SPRW": 2 },
+        noScores: { "INWS": 1 }
+    },
+    {
+        text: "自由で開放的な環境を好む。",
+        yesScores: { "CROW": 2, "YTGS": 3 },
+        noScores: { "INWS": 2 }
+    },
+    {
+        text: "渡りルートは事前に決めておきたい方だ。",
+        yesScores: { "YTGS": 3}
+    },
+    {
+        text: "自分の縄張りをはっきりと主張する方だ。",
+        yesScores: { "INWS": 3, "YTGS": 3 }
+    },
+    {
+        text: "あなたは鳥をコントロールするのではなく、鳥にコントロールされている。",
+        yesScores: { "BDER": 15}
+    }
+
+];
+
+// 2. 診断結果のデータ（ここは前回と同じ）
+const results = {
+    "SENG": { name: "SENG", desc: "シマエナガ。小さくて白いです。人を魅了する能力にかけては、右に出る鳥はいません。" },
+    "INWS": { name: "INWS", desc: "イヌワシ。大胆な指導鳥タイプ。" },
+    "BDER": { name: "BDER", desc: "バーダー。貪欲な鳥欲がある野鳥愛好家。" },
+    "SPRW": { name: "SPRW", desc: "スズメ。ささいなことで幸せを感じられるタイプです。" },
+    "YTGS": { name: "YTGS", desc: "ヤツガシラ。カリスマ性があり、見る人を魅了します。" },
+    "CROW": { name: "CROW", desc: "カラス。賢くて好奇心旺盛な思考鳥。新しいことの探索・体験にいつも積極的です。" }
+
+};
+
+// 3. 各タイプの初期スコア（ここは前回と同じ）
+let scores = {
+    "SENG": 0,
+    "INWS": 0,
+    "BDER": 0,
+    "SPRW": 0,
+    "YTGS": 0,
+    "CROW": 0
+};
+
+let currentIdx = 0;
+
+function startQuiz() {
+    document.getElementById("start-screen").classList.add("hidden");
+    document.getElementById("question-screen").classList.remove("hidden");
+    showQuestion();
+}
+
+function showQuestion() {
+    let q = questions[currentIdx];
+    document.getElementById("question-number").innerText = `質問 ${currentIdx + 1} / ${questions.length}`;
+    document.getElementById("question-text").innerText = q.text;
+}
+
+// ★ 変更点：選択された方のスコアをループで全部加算する
+function answer(isYes) {
+    let q = questions[currentIdx];
+    
+    // 「はい」なら yesScores、「いいえ」なら noScores を使う
+    let targetScores = isYes ? q.yesScores : q.noScores;
+
+    // 指定されたすべてのタイプに点数を足していく
+    for (let type in targetScores) {
+        if (scores[type] !== undefined) {
+            scores[type] += targetScores[type]; // 指定された点数分をプラス
+        }
+    }
+
+    currentIdx++;
+    if (currentIdx < questions.length) {
+        showQuestion();
+    } else {
+        showResult();
+    }
+}
+
+// ★ 同点時の優先順位チェック付きの結果表示（前回と同じ）
+function showResult() {
+    document.getElementById("question-screen").classList.add("hidden");
+    document.getElementById("result-screen").classList.remove("hidden");
+
+    const priorityOrder = ["SENG", "SPRW", "CROW", "YTGS", "INWS", "BDER"];
+    let highestType = priorityOrder[0];
+    let maxScore = -1;
+
+    for (let i = 0; i < priorityOrder.length; i++) {
+        let type = priorityOrder[i];
+        let score = scores[type];
+
+        if (score > maxScore) {
+            maxScore = score;
+            highestType = type;
+        }
+    }
+
+    let finalResult = results[highestType];
+    document.getElementById("result-type").innerText = finalResult.name;
+    document.getElementById("result-desc").innerText = finalResult.desc;
+}
+</script>
+
+</body>
+</html>
