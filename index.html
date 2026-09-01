@@ -38,7 +38,8 @@
 
     <div id="result-screen" class="hidden">
         <h2>あなたのバードナリティは...</h2>
-        <div id="result-type" class="result-title">タイプ名</div>
+        <div id="result-type" class="result-title">タイプ名</div><!-- ★ 追加した1行：画像を表示するエリア -->
+        <img id="result-img" src="" alt="鳥の画像" style="max-width: 180px; width: 100%; height: auto; margin: 15px auto; display: block;">
         <p id="result-desc">解説文</p>
         
         <!-- SNSシェア＆公式アカウントボタン -->
@@ -126,7 +127,7 @@ const questions = [
 
 // 2. 診断結果のデータ
 const results = {
-    "SENG": { name: "SENG", desc: "シマエナガ。小さくて白いです。人を魅了する能力にかけては、右に出る鳥はいません。" },
+    "SENG": { name: "SENG", desc: "シマエナガ。小さくて白いです。人を魅了する能力にかけては、右に出る鳥はいません。", img: "seng.png" },
     "INWS": { name: "INWS", desc: "イヌワシ。大胆な指導鳥タイプ。" },
     "BDER": { name: "BDER", desc: "バーダー。貪欲な鳥欲がある野鳥愛好家。" },
     "SPRW": { name: "SPRW", desc: "スズメ。ささいなことで幸せを感じられるタイプです。" },
@@ -201,6 +202,7 @@ function showResult() {
     currentResultName = finalResult.name;
     document.getElementById("result-type").innerText = finalResult.name;
     document.getElementById("result-desc").innerText = finalResult.desc;
+    document.getElementById("result-img").src = finalResult.img;
 }
 
 // X (旧Twitter) でシェア
