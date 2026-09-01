@@ -8,14 +8,14 @@
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
         h1 { color: #333; font-size: 24px; margin-bottom: 20px; }
-        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; background-color: #4a6fa5; color: white; font-size: 16px; cursor: pointer; transition: background 0.2s; box-sizing: border-box; text-decoration: none; }
-        .btn:hover { opacity: 0.9; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; background-color: #4a6fa5; color: white; font-size: 16px; cursor: pointer; transition: opacity 0.2s; box-sizing: border-box; text-decoration: none; }
+        .btn:hover { opacity: 0.85; }
         /* X (Twitter) ボタン */
         .btn-x { background-color: #000000; font-weight: bold; }
         /* LINE シェアボタン */
         .btn-line { background-color: #06C755; font-weight: bold; }
-        /* LINE 友だち追加ボタン */
-        .btn-line-add { background-color: #00B900; font-weight: bold; }
+        /* Instagram ボタン (グラデーション風) */
+        .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); font-weight: bold; }
         .hidden { display: none; }
         .result-title { font-size: 26px; color: #e63946; font-weight: bold; margin-top: 15px; margin-bottom: 15px; }
     </style>
@@ -41,12 +41,12 @@
         <div id="result-type" class="result-title">タイプ名</div>
         <p id="result-desc">解説文</p>
         
-        <!-- SNSシェア＆誘導ボタン群 -->
+        <!-- SNSシェア＆公式アカウントボタン -->
         <button class="btn btn-x" onclick="shareX()">X (旧Twitter) で結果をシェア</button>
         <button class="btn btn-line" onclick="shareLine()">LINEで結果をシェア</button>
 
-        <!-- もしLINE公式アカウントをお持ちの場合は下記を使用（いらない場合は削ってください） -->
-        <!-- <a class="btn btn-line-add" href="ここにあなたのLINE公式アカウントのURL" target="_blank">公式LINEを友だち追加</a> -->
+        <!-- ★ Instagram 公式アカウントボタン（URLを自分のインスタアカウントに変更してください） -->
+        <a class="btn btn-insta" href="https://www.instagram.com/あなたのID/" target="_blank" rel="noopener noreferrer">Instagram公式アカウントを見る</a>
         
         <button class="btn" style="background-color: #6c757d;" onclick="location.reload()">もう一度やる</button>
     </div>
@@ -212,7 +212,7 @@ function shareX() {
     window.open(shareUrl, '_blank');
 }
 
-// ★ LINEで結果をシェア
+// LINEで結果をシェア
 function shareLine() {
     const siteUrl = window.location.href;
     const text = `私のバードナリティは【${currentResultName}】でした！\n${siteUrl}`;
