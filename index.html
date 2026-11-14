@@ -121,7 +121,7 @@ const questions = [
     },
     {
         text: "あなたは鳥をコントロールするのではなく、鳥にコントロールされている。",
-        yesScores: { "BDER": 10 }
+        yesScores: { "BDER": 8 }
     }
 ];
 
@@ -147,7 +147,11 @@ let scores = {
     "BDER": 0,
     "SPRW": 0,
     "YTGS": 0,
-    "CROW": 0
+    "CROW": 0,
+    "OONG": 0,
+    "KBTK": 0,
+    "SNIP": 0,
+    "BOBY": 0,
 };
 
 let currentIdx = 0;
@@ -189,7 +193,7 @@ function showResult() {
     document.getElementById("question-screen").classList.add("hidden");
     document.getElementById("result-screen").classList.remove("hidden");
 
-    const priorityOrder = ["SENG", "SPRW", "CROW", "YTGS", "INWS", "BDER"];
+    const priorityOrder = ["SENG", "SPRW", "CROW", "YTGS", "BOBY", "OONG", "SNIP", "KBTK","INWS", "BDER"];
     let highestType = priorityOrder[0];
     let maxScore = -1;
 
