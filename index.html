@@ -157,6 +157,7 @@ let scores = {
 
 let currentIdx = 0;
 let currentResultName = "";
+let currentResultDesc = ""; // ★ 追加：説明文を保存する変数
 
 function startQuiz() {
     document.getElementById("start-screen").classList.add("hidden");
@@ -210,6 +211,7 @@ function showResult() {
 
     let finalResult = results[highestType];
     currentResultName = finalResult.name;
+    currentResultDesc = finalResult.desc; // ★ 追加：説明文をセット
     document.getElementById("result-type").innerText = finalResult.name;
     document.getElementById("result-desc").innerText = finalResult.desc;
     document.getElementById("result-img").src = finalResult.img;
@@ -218,7 +220,7 @@ function showResult() {
 // X (旧Twitter) でシェア
 function shareX() {
     const siteUrl = window.location.href;
-    const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n`;
+    const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n\n${currentResultDesc}\n\n`;
     const hashtags = "MBirdTI診断,バードナリティ診断,NF,京大野鳥研究会";
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(siteUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
     window.open(shareUrl, '_blank');
@@ -227,7 +229,7 @@ function shareX() {
 // LINEで結果をシェア
 function shareLine() {
     const siteUrl = window.location.href;
-    const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n${siteUrl}`;
+    const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n\n${currentResultDesc}\n\n${siteUrl}`;
     const shareUrl = `https://line.me/R/share?text=${encodeURIComponent(text)}`;
     window.open(shareUrl, '_blank');
 }
