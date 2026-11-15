@@ -63,20 +63,20 @@ const questions = [
     },
     {
         text: "群れで何かをするのが好き。",
-        yesScores: { "SPRW": 3, "SENG": 3, "OONG": 3 }
+        yesScores: { "SPRW": 3, "SENG": 3, "OONG": 3, "BOBY": 2 }
     },
     {
         text: "未経験の新しいアプローチを試すのは楽しいと感じる。",
-        yesScores: { "CROW": 3 }
+        yesScores: { "CROW": 3, "BOBY": 3 }
     },
     {
         text: "群れで行う趣味やアクティビティより、一羽で行うものの方が楽しい。",
-        yesScores: { "INWS": 3, "CROW": 1 },
+        yesScores: { "INWS": 3, "CROW": 1, KBTK: 2, "SNIP": 3 },
         noScores: { "SPRW": 3, "SENG": 3 }
     },
     {
         text: "やらなければならないことをしてから羽繕いするのが好き。",
-        yesScores: { "CROW": 1, "INWS": 1 }
+        yesScores: { "CROW": 1, "INWS": 1, "SNIP": 3}
     },
     {
         text: "静かな隠れ家のような場所より、鳥がたくさんいて賑やかな雰囲気の方が好き。",
@@ -84,41 +84,42 @@ const questions = [
     },
     {
         text: "定期的に新しいつがい相手を作っている。",
-        noScores: { "INWS": 3, "CROW": 3 }
+        yesScores: { "KBTK": 3 },
+        noScores: { "INWS": 3, "CROW": 3, "OONG": 3, "BOBY": 3 }
     },
     {
         text: "締め切りを守るのが苦手。",
-        yesScores: { "SENG": 1, "SPRW": 1 }
+        yesScores: { "SENG": 2, "SPRW": 2, "KBTK: 2" }
     },
     {
         text: "少数の鳥と深く付き合う方が好きだ。",
-        yesScores: { "INWS": 3, "CROW": 1, "YTGS": 2 }
+        yesScores: { "INWS": 3, "CROW": 1, "YTGS": 2, "SNIP": 2 }
     },
     {
         text: "人前でさえずることに抵抗がない。",
-        yesScores: { "SPRW": 3, "SENG": 2, "CROW": 2 },
+        yesScores: { "SPRW": 3, "SENG": 2, "CROW": 2, "KBTK": 3 },
     },
     {
         text: "新しい環境にすぐに馴染める方だ。",
-        yesScores: { "CROW": 3, "SPRW": 2 }
+        yesScores: { "CROW": 3, "SPRW": 2, "BOBY": 4 }
     },
     {
         text: "自由で開放的な環境を好む。",
-        yesScores: { "SPRW": 1, "CROW": 2, "YTGS": 3, "OONG": 4 },
+        yesScores: { "SPRW": 1, "CROW": 2, "YTGS": 3, "OONG": 4 ,"BOBY": 4, "SNIP": 2 },
         noScores: { "INWS": 2 }
     },
     {
         text: "渡りルートは事前に決めておきたい方だ。",
-        yesScores: { "YTGS": 3, "OONG": 2}
+        yesScores: { "YTGS": 3, "OONG": 2, "KBTK": 2 }
     },
     {
         text: "自分の縄張りをはっきりと主張する方だ。",
-        yesScores: { "INWS": 3, "YTGS": 3 }
+        yesScores: { "INWS": 3, "YTGS": 3, KBTK": 3 }
     },
     {
         text: "今年のNFのテーマはやりすぎだ。",
         yesScores: { "SNIP": 3 },
-        noScores: {"KBTK": 3}
+        noScores: { "KBTK": 3 }
     },
     {
         text: "あなたは鳥をコントロールするのではなく、鳥にコントロールされている。",
@@ -128,12 +129,12 @@ const questions = [
 
 // 2. 診断結果のデータ
 const results = {
-    "SENG": { name: "SENG", desc: "シマエナガ。\n小さくて白いです。\n人を魅了する能力にかけては、右に出る鳥はいません。", img: "SENG.png" },
+    "SENG": { name: "SENG", desc: "シマエナガ。\n小さくて白いです。\n人を魅了する能力にかけては、\n右に出る鳥はいません。", img: "SENG.png" },
     "INWS": { name: "INWS", desc: "イヌワシ。\n大胆な指導鳥タイプ。" },
     "BDER": { name: "BDER", desc: "バーダー。\n貪欲な鳥欲がある野鳥愛好家。" },
     "SPRW": { name: "SPRW", desc: "スズメ。\nささいなことで幸せを感じられるタイプです。" },
     "YTGS": { name: "YTGS", desc: "ヤツガシラ。\nカリスマ性があり、見る人を魅了します。", img: "YTGS.png" },
-    "CROW": { name: "CROW", desc: "カラス。\n賢くて好奇心旺盛な思考鳥。\n新しいことの探索・体験にいつも積極的です。" },
+    "CROW": { name: "CROW", desc: "カラス。\n賢くて好奇心旺盛な思考鳥。\n新しいことの探索・体験に\nいつも積極的です。" },
     "OONG": { name: "OONG", desc: "オオミズナギドリ。\nあなたの心はいつも大海原を駆け巡っています。\n自由を愛するバードです。" },
     "KBTK": { name: "KBTK", desc: "キビタキ。\n派手でお調子者です。" },
     "SNIP": { name: "SNIP", desc: "タシギ。\n真面目で地味めなあなたですが、実はコアなファンがたくさんいるでしょう。" },
@@ -217,7 +218,7 @@ function showResult() {
 // X (旧Twitter) でシェア
 function shareX() {
     const siteUrl = window.location.href;
-    const text = `私のバードナリティは【${currentResultName}】でした！\n`;
+    const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n`;
     const hashtags = "MBirdTI診断,バードナリティ診断,NF,京大野鳥研究会";
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(siteUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
     window.open(shareUrl, '_blank');
@@ -226,7 +227,7 @@ function shareX() {
 // LINEで結果をシェア
 function shareLine() {
     const siteUrl = window.location.href;
-    const text = `私のバードナリティは【${currentResultName}】でした！\n${siteUrl}`;
+    const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n${siteUrl}`;
     const shareUrl = `https://line.me/R/share?text=${encodeURIComponent(text)}`;
     window.open(shareUrl, '_blank');
 }
