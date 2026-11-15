@@ -71,7 +71,7 @@ const questions = [
     },
     {
         text: "群れで行う趣味やアクティビティより、一羽で行うものの方が楽しい。",
-        yesScores: { "INWS": 3, "CROW": 1, "KBTK": 2, "SNIP": 3 },
+        yesScores: { "INWS": 3, "KBTK": 2, "SNIP": 3 },
         noScores: { "SPRW": 3, "SENG": 3 }
     },
     {
@@ -93,7 +93,7 @@ const questions = [
     },
     {
         text: "少数の鳥と深く付き合う方が好きだ。",
-        yesScores: { "INWS": 3, "CROW": 1, "YTGS": 2, "SNIP": 2 }
+        yesScores: { "INWS": 3, "YTGS": 2, "SNIP": 2 }
     },
     {
         text: "人前でさえずることに抵抗がない。",
@@ -195,7 +195,7 @@ function showResult() {
     document.getElementById("question-screen").classList.add("hidden");
     document.getElementById("result-screen").classList.remove("hidden");
 
-    const priorityOrder = ["SENG", "SPRW", "YTGS", "BOBY", "OONG", "SNIP", "KBTK", "CROW", "INWS", "BDER"];
+    const priorityOrder = ["SPRW", "YTGS", "BOBY", "OONG", "SENG", "SNIP", "KBTK", "CROW", "INWS", "BDER"];
     let highestType = priorityOrder[0];
     let maxScore = -1;
 
