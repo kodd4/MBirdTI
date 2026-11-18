@@ -64,16 +64,17 @@
 const questions = [
     {
         text: "自分のねぐらと巣は清潔で整理整頓されている。",
-        yesScores: { "SENG": 3, "INWS": 1 }, 
+        yesScores: { "SENG": 3}, 
         noScores: { "YTGS": 3 } 
     },
     {
         text: "昼よりも夜の方がやる気が出るタイプだ。",
         yesScores: { "KIWI": 3, "SNIP": 3}, 
+         noScores: { "KWSM": 3 }
     },
     {
         text: "群れで何かをするのが好き。",
-        yesScores: { "SPRW": 3, "SENG": 3, "OONG": 3, "BOBY": 2 }
+        yesScores: { "SPRW": 3, "SENG": 3, "ETPK": 3 }
     },
      {
         text: "つい話に花が咲き時間を忘れてしまう。",
@@ -84,16 +85,20 @@ const questions = [
         yesScores: { "CROW": 3, "BOBY": 3 }
     },
     {
+        text: "遠く離れた地へ出かけることは好きだ。",
+        yesScores: { "OONG": 3, "YTGS": 3, "KBTK": 3 }
+    },
+    {
         text: "群れで行う趣味やアクティビティより、一羽で行うものの方が楽しい。",
-        yesScores: { "INWS": 3, "KBTK": 2, "SNIP": 3 }
+        yesScores: { "INWS": 3 }
     },
     {
         text: "やらなければならないことをしてから羽繕いするのが好き。",
-        yesScores: { "CROW": 1, "INWS": 1, "SNIP": 3}
+        yesScores: { "CROW": 3, "SNIP": 3, "INWS": 3, "KIWI": 3, "TOBI": 3 }
     },
     {
         text: "静かな隠れ家のような場所より、鳥がたくさんいて賑やかな雰囲気の方が好き。",
-        yesScores: { "SPRW": 3, "SENG": 3, "CROW": 1, "OONG": 3}
+        yesScores: { "SPRW": 3, "SENG": 3, "OONG": 3, "TOBI": 3}
     },
     {
         text: "定期的に新しいつがい相手を作っている。",
@@ -102,34 +107,40 @@ const questions = [
     },
     {
         text: "締め切りを守るのが苦手。",
-        yesScores: { "SENG": 3, "KBTK": 2 }
+        yesScores: { "SENG": 3, "KBTK": 2, "ETPK": 3 }
     },
     {
         text: "少数の鳥と深く付き合う方が好きだ。",
-        yesScores: { "INWS": 3, "YTGS": 2, "SNIP": 2 }
+        yesScores: { "YTGS": 3, "SNIP": 3, "KIWI": 3, "KWSM": 3 }
+    },
+     {
+        text: "複数のことに同時に取り組むよりも、1つのことにじっくり向き合いたい。",
+        yesScores: { "ETPK": 3, "KWSM": 3 }
     },
     {
         text: "人前でさえずることに抵抗がない。",
-        yesScores: { "SPRW": 3, "CROW": 2, "KBTK": 3 },
+        yesScores: { "SPRW": 3, "KBTK": 3, "KWSM": 3 },
         noScores: { "SNIP" : 3 }
     },
     {
         text: "新しい環境にすぐに馴染める方だ。",
-        yesScores: { "CROW": 3, "BOBY": 4 }
+        yesScores: { "CROW": 3, "BOBY": 3, "TOBI": 3 }
     },
     {
         text: "自由で開放的な環境を好む。",
-        yesScores: { "SPRW": 3, "CROW": 2, "YTGS": 3, "OONG": 4 ,"BOBY": 4, "SNIP": 2 },
-        noScores: { "INWS": 2 }
+        yesScores: { "SPRW": 3, "YTGS": 3, "OONG": 3 ,"BOBY": 3, "ETPK": 3 }
     },
     {
-        text: "渡りルートは事前に決めておきたい方だ。",
-        yesScores: { "YTGS": 3, "OONG": 2, "KBTK": 2 }
+        text: "渡りルートは事前に決めておきたい方だ。"
     },
     {
         text: "素早く優雅に水面から飛び立たつよりも、水中で優雅に泳ぐことを優先したい。",
-        yesScores: { "ETPK": 3 },
+        yesScores: { "ETPK": 6 },
         noScores: { "OONG": 3, "BOBY": 3 }
+    },
+    {
+        text: "感情よりも事実を優先する。",
+        yesScores: { "TOBI": 3, "CROW": 3, "INWS": 3}
     },
     {
         text: "実は高いところは苦手だ。",
@@ -146,7 +157,8 @@ const questions = [
     },
     {
         text: "野鳥が痒そうなところをかわりにかいてあげたい。",
-        yesScores: { "BDER": 3, "SENG": 3 }
+        yesScores: { "BDER": 3, "SENG": 3 },
+        noScores: { "TOBI": 3 }
     },
     {
         text: "あなたは鳥をコントロールするのではなく、鳥にコントロールされている。",
@@ -158,10 +170,10 @@ const questions = [
 const results = {
     "SENG": { name: "SENG", desc: "シマエナガ。\n小さくて白いです。\n人を魅了する能力にかけては、\n右に出る鳥はいません。", img: "SENG.png" },
     "INWS": { name: "INWS", desc: "イヌワシ。\n大胆な指導鳥タイプ。野心に溢れ\nトップにのしあがります。", img: "INWS.png" },
-    "BDER": { name: "BDER", desc: "バーダー。\n優しく鳥思いです。" },
-    "SPRW": { name: "SPRW", desc: "スズメ。\n友鳥とのお喋りが止まらないあなた。\n何気ない日常の中に幸せを見つけられる\n素朴さが魅力です。" },
+    "BDER": { name: "BDER", desc: "バーダー。\n優しく鳥思いです。", img: "BDER.png" },
+    "SPRW": { name: "SPRW", desc: "スズメ。\n友鳥とのお喋りが止まらないあなた。\n何気ない日常の中に幸せを見つけられる\n素朴さが魅力です。", img: "SPRW.png" },
     "YTGS": { name: "YTGS", desc: "ヤツガシラ。\nカリスマ性があり、見る人を魅了します。\nびっくりすると、髪が逆立ちます。", img: "YTGS.png" },
-    "CROW": { name: "CROW", desc: "カラス。\n賢くて好奇心旺盛な思考鳥。\n新しいことの探索・体験に\nいつも積極的です。" },
+    "CROW": { name: "CROW", desc: "カラス。\n賢くて好奇心旺盛な思考鳥。\n新しいことの探索・体験に\nいつも積極的です。", img: "CROW.png" },
     "OONG": { name: "OONG", desc: "オオミズナギドリ。\nあなたの心はいつも\n大海原を駆け巡っています。\n自由を愛するバードです。", img:"OONG.jpg" },
     "KBTK": { name: "KBTK", desc: "キビタキ。派手でお調子者です。\n目立つことが好きで、\nいつも美しい歌声を披露したくて\nたまりません。", img: "KBTK.png" },
     "SNIP": { name: "SNIP", desc: "タシギ。\n真面目で地味めなあなたですが、\n実はコアなファンが\nたくさんいるでしょう。", img: "SNIP.jpg" },
