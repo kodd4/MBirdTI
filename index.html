@@ -202,7 +202,8 @@ let scores = {
     "KMFR": 0,
     "KIWI": 0,
     "TOBI": 0,
-    "KWSM": 0
+    "KWSM": 0,
+    "YMGR": 0
 };
 
 let currentIdx = 0;
@@ -245,7 +246,7 @@ function showResult() {
     document.getElementById("question-screen").classList.add("hidden");
     document.getElementById("result-screen").classList.remove("hidden");
 
-    const priorityOrder = ["SPRW", "YTGS", "BOBY", "OONG", "SENG", "TOBI", "SNIP", "KBTK", "KWSM" ,"CROW", "INWS", "KMFR", "KIWI", "BDER"];
+    const priorityOrder = ["SPRW", "YTGS", "BOBY", "OONG", "SENG", "TOBI", "SNIP", "KBTK", "KWSM" ,"CROW", "YMGR", "INWS", "KMFR", "KIWI", "BDER"];
     let highestType = priorityOrder[0];
     let maxScore = -1;
 
