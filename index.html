@@ -64,7 +64,7 @@
 const questions = [
     {
         text: "自分のねぐらと巣は\n清潔で整理整頓されている。",
-        yesScores: { "SENG": 3}, 
+        yesScores: { "SENG": 3 }, 
         noScores: { "YTGS": 3 } 
     },
     {
@@ -74,7 +74,7 @@ const questions = [
     },
     {
         text: "群れで何かをするのが好き。",
-        yesScores: { "SPRW": 3, "SENG": 3}
+        yesScores: { "SPRW": 3, "SENG": 3, "YMGR": 3}
     },
      {
         text: "つい話に花が咲き時間を忘れてしまう。",
@@ -94,7 +94,7 @@ const questions = [
     },
     {
         text: "やらなければならないことをしてから\n羽繕いするのが好き。",
-        yesScores: { "CROW": 3, "SNIP": 3, "INWS": 3, "KIWI": 3, "TOBI": 3 }
+        yesScores: { "CROW": 3, "SNIP": 3, "INWS": 3, "KIWI": 3, "TOBI": 3, "YMGR": 3 }
     },
     {
         text: "静かな隠れ家のような場所より、\n鳥がたくさんいて\n賑やかな雰囲気の方が好き。",
@@ -107,7 +107,8 @@ const questions = [
     },
     {
         text: "締め切りを守るのが苦手。",
-        yesScores: { "SENG": 3, "KBTK": 2, "KMFR": 3 }
+        yesScores: { "SENG": 3, "KBTK": 2, "KMFR": 3 },
+        noScores: { "YMGR": 3 }
     },
     {
         text: "少数の鳥と深く付き合う方が好きだ。",
@@ -115,7 +116,7 @@ const questions = [
     },
      {
         text: "複数のことに同時に取り組むよりも、\n1つのことにじっくり向き合う方が\n得意だ。",
-        yesScores: { "KMFR": 3, "KWSM": 3 }
+        yesScores: { "KMFR": 3, "KWSM": 3, "YMGR": 3 }
     },
     {
         text: "人前でさえずることに抵抗がない。",
@@ -157,7 +158,7 @@ const questions = [
     },
     {
         text: "野鳥が痒そうなところをかわりにかいてあげたい。",
-        yesScores: { "BDER": 3, "SENG": 3 },
+        yesScores: { "BDER": 3, "SENG": 3, "YMGR": 3 },
         noScores: { "TOBI": 3 }
     },
     {
@@ -182,8 +183,8 @@ const results = {
     "KIWI": { name: "KIWI", desc: "キーウィ。\n地に足のついた暮らしを好みます。\n朝は苦手で超夜型。", img: "KIWI.jpg" },
     "TOBI": { name: "TOBI", desc: "トビ。ずる賢いあなたは、\n人の手柄を盗むことにも躊躇しません。\n世渡り上手でしたたかです。", img: "TOBI.jpg" },
     "KWSM": { name: "KWSM", desc: "カワセミ。\n煌めくオーラを放っています。\n好きなことへの集中力は\nすさまじいです。", img: "KWSM.jpg" },
-    "YMGR": { name: "YMGR", desc: "ヤマガラ。人懐っこい性格です。コツコツ頑張る、縁の下の力持ちです。", img: "YMGR.jpg" },
-    "YOTK": { name: "YMGR", desc: "ヨタカ。普段は静かですが、口を開くと衝撃的な一面も見られます。", img: "YOTK.jpg" }
+    "YMGR": { name: "YMGR", desc: "ヤマガラ。\n人懐っこい性格で、コツコツ頑張る努力家タイプ。\nみんなを支える縁の下の力持ちです。", img: "YMGR.jpg" },
+    "YOTK": { name: "YOTK", desc: "ヨタカ。普段は静かですが、口を開くと衝撃的な一面も見られます。", img: "YOTK.jpg" }
 };
 
 // 3. 各タイプの初期スコア
