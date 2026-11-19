@@ -43,7 +43,7 @@
         <p id="result-desc">解説文</p>
 
 　　　　<!-- ★ ここにサークルの説明を追加（margin-top: 24px; で1行分の余白を空けています） -->
-　　　　<p style="margin-top: 12px; margin-bottom: 20px; font-size: 14px; color: #444444; line-height: 1.6; background-color: #f8f9fa; padding: 15px 15px 4px 15px; border-radius: 8px; text-align: left; text-indent: 0;">京大野鳥研究会は20日（金）と21日（土）に総人棟1304演習室にてNFに出展中！<br>所属大学・回生問わず、いつでも新入会員を募集しています！<br>
+　　　　<p style="margin-top: 12px; margin-bottom: 20px; font-size: 14px; color: #444444; line-height: 1.6; background-color: #f8f9fa; padding: 15px 15px 4px 15px; border-radius: 8px; text-align: left; text-indent: 0;">京大野鳥研究会は20日(金)と21日(土)に\n総人棟1304演習室においてNFに出展中！<br>また所属大学・回生問わず、\nいつでも新入会員を募集しています！<br>
 　　　　</p>
         
         <!-- SNSシェア＆公式アカウントボタン -->
@@ -63,7 +63,7 @@
 // 1. 質問データ
 const questions = [
     {
-        text: "自分のねぐらと巣は清潔で整理整頓されている。",
+        text: "自分のねぐらと巣は\n清潔で整理整頓されている。",
         yesScores: { "SENG": 3}, 
         noScores: { "YTGS": 3 } 
     },
@@ -89,7 +89,7 @@ const questions = [
         yesScores: { "OONG": 3, "YTGS": 3, "KBTK": 3 }
     },
     {
-        text: "群れで行う趣味やアクティビティより、一羽で行うものの方が楽しい。",
+        text: "群れで行う趣味やアクティビティより、\n一羽で行うものの方が楽しい。",
         yesScores: { "INWS": 3 }
     },
     {
@@ -97,7 +97,7 @@ const questions = [
         yesScores: { "CROW": 3, "SNIP": 3, "INWS": 3, "KIWI": 3, "TOBI": 3 }
     },
     {
-        text: "静かな隠れ家のような場所より、\n鳥がたくさんいて賑やかな雰囲気の方が好き。",
+        text: "静かな隠れ家のような場所より、\n鳥がたくさんいて\n賑やかな雰囲気の方が好き。",
         yesScores: { "SPRW": 3, "SENG": 3, "OONG": 3, "TOBI": 3, "KMFR": 3}
     },
     {
@@ -114,7 +114,7 @@ const questions = [
         yesScores: { "YTGS": 3, "SNIP": 3, "KIWI": 3, "KWSM": 3 }
     },
      {
-        text: "複数のことに同時に取り組むよりも、\n1つのことにじっくり向き合う方が得意だ。",
+        text: "複数のことに同時に取り組むよりも、\n1つのことにじっくり向き合う方が\n得意だ。",
         yesScores: { "KMFR": 3, "KWSM": 3 }
     },
     {
@@ -128,7 +128,7 @@ const questions = [
     },
     {
         text: "自由で開放的な環境を好む。",
-        yesScores: { "SPRW": 3, "YTGS": 3, "OONG": 3 ,"BOBY": 3, "ETPK": 3 }
+        yesScores: { "SPRW": 3, "YTGS": 3, "OONG": 3 ,"BOBY": 3, "KMFR": 3 }
     },
     {
         text: "渡りルートは事前に決めておきたい方だ。"
@@ -178,7 +178,7 @@ const results = {
     "KBTK": { name: "KBTK", desc: "キビタキ。派手でお調子者です。\n目立つことが好きで、\nいつも美しい歌声を披露したくて\nたまりません。", img: "KBTK.png" },
     "SNIP": { name: "SNIP", desc: "タシギ。\n真面目で地味めなあなたですが、\n実はコアなファンが\nたくさんいるでしょう。", img: "SNIP.jpg" },
     "BOBY": { name: "BOBY", desc: "カツオドリ。普段は優雅ですが、\n猪突猛進であらゆることに\n突っ込んでいく一面もあります。", img: "BOBY.jpg" },
-    "KMFR": { name: "KMFR", desc: "ケイマフリ。飛び立つのは苦手でも\n水中では速く泳げるように、\n得意なフィールドでは\n卓越した力を発揮します。", img: "KMFR.jpg" },
+    "KMFR": { name: "KMFR", desc: "ケイマフリ。\n飛び立つのは苦手でも\n水中では速く泳げるように、\n得意なフィールドでは\n卓越した力を発揮します。", img: "KMFR.jpg" },
     "KIWI": { name: "KIWI", desc: "キーウィ。\n地に足のついた暮らしを好みます。\n朝は苦手で超夜型。", img: "KIWI.jpg" },
     "TOBI": { name: "TOBI", desc: "トビ。ずる賢いあなたは、\n人の手柄を盗むことにも躊躇しません。\n世渡り上手でしたたかです。", img: "TOBI.jpg" },
     "KWSM": { name: "KWSM", desc: "カワセミ。\n煌めくオーラを放っています。\n好きなことへの集中力は\nすさまじいです。", img: "KWSM.jpg" },
@@ -270,7 +270,7 @@ function showResult() {
 function shareX() {
     const siteUrl = window.location.href;
     const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n\n${currentResultDesc}\n\n`;
-    const hashtags = "MBirdTI診断,バードナリティ診断,NF,京大野鳥研究会";
+    const hashtags = "MBirdTI診断,バードナリティ診断,京大NF2026,11月祭,京大野鳥研究会";
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(siteUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
     window.open(shareUrl, '_blank');
 }
