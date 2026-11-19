@@ -270,7 +270,7 @@ function showResult() {
 function shareX() {
     const siteUrl = window.location.href;
     const text = `私のバードナリティは\n【${currentResultName}】\nでした！\n\n${currentResultDesc}\n\n`;
-    const hashtags = "MBirdTI診断,バードナリティ診断,京大NF2026,11月祭,京大野鳥研究会";
+    const hashtags = "MBirdTI診断,バードナリティ診断,京大NF2026,11月祭,とりけん,京大野鳥研究会";
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(siteUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
     window.open(shareUrl, '_blank');
 }
